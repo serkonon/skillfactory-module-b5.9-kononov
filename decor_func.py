@@ -8,16 +8,12 @@ def time_this(num_runs=10):
     :return: функция-декоратор
     """
     def decorator(func):
-        def wrap():
-            avg_time = 0
-            for _ in range(num_runs):
-                t0 = time.time()
-                func()
-                t1 = time.time()
-                avg_time += (t1 - t0)
-            avg_time /= num_runs
-            print("Выполнение заняло %.5f секунд" % avg_time)
-        return wrap
+        t0 = time.time()
+        for _ in range(num_runs):
+            func()
+        t1 = time.time()
+        print("Выполнение заняло %.5f секунд" % ((t1 - t0) / num_runs))
+        return func
     return decorator
 
 
